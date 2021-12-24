@@ -1,0 +1,1056 @@
+paths:
+  /create-church-app-account:
+    post:
+      tags: # Tag property
+        - AUTH # Value of the tag
+      summary: CHURCH ACCOUNT REGISTRATION ENDPOINT FOR CHURCH ADMINS.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   church-app-account-registration # name of request, can be any name
+          description: It enables all admins to create church account
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/churchAccount"
+      responses: # server responses
+        201:
+          description: should return church account registration successful
+
+  /login:
+    post:
+      tags: # Tag property
+        - AUTH # Value of the tag
+      summary: GENERAL LOGIN ENDPOINT FOR CHURCH USERS BOTH ADMINS AND MEMBERS.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:  general login endpoint # name of request, can be any name
+          description: It enables all church account types to login
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/generalLogin"
+      responses: # server responses
+        201:
+          description: should return login successful
+
+  /validate-user-token: # path of the grp from your endpoint
+    post:
+      tags: # Tag property
+        - AUTH # Value of the tag
+      summary: ENDPOINT FOR VALIDATIONG TOKEN
+      produces:
+        - application/json
+      parameters: # request parameters
+        - in: body # request body
+          name: for validating user token # name of request, can be any name
+          description: It enables user to validate auth token
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/verifyToken"
+      responses: # server responses
+        201:
+          description: should return user details
+
+
+  /validate-email-account:
+    post:
+      tags: # Tag property
+        - AUTH # Value of the tag
+      summary: FOR VALIDATING EMAIL ACCOUNT.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   validate email account # name of request, can be any name
+          description: It enables all users to validate email account
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/validateEmail"
+      responses: # server responses
+        201:
+          description: should return successful
+
+
+
+
+  /get-all-church-users:
+    get:
+      tags:
+        - GET ALL CHURCH MEMBERS # Value of the tag
+      summary: GET ALL CHURCH MEMBERS.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50VHlwZSI6ImNodXJjaEFkbWluIiwiX2VtYWlsIjoicHJpbmNlQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoicHJpbmNlMjIiLCJpZCI6ImY4N2RiOGYxLWRjNmMtNDQzNC04Mzk4LTJiZjRjODA1MDYxYSIsImlhdCI6MTYzOTc3NTM0MCwiZXhwIjoxNjM5Nzc3MTQwfQ.Rm_roIPmaLygRBXEgaE1ssUUrc8LJqx73jfPoynnfE0
+
+        - in: query
+          name: page
+          type: number
+          default: 1
+          required: true
+      responses:
+        200:
+          description: should return all church members
+
+
+
+
+  /get-church-user-by-id:
+    get:
+      tags:
+        - GET A CHURCH MEMBER BY ID # Value of the tag
+      summary: GET A CHURCH MEMBER.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-0
+
+
+        - in: query
+          name: authId
+          type: string
+          default: a5970193-826b-4163-ad34-c2edc2f2187a
+          required: true
+      responses:
+        200:
+          description: should return a church member
+
+
+
+  /update-church-auth-data-by-id:
+    put:
+      tags:
+        - UPDATE A CHURCH ADMIN ACCOUNT # Value of the tag
+      summary: UPDATE A CHURCH ADMIN ACCOUNT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   update-account # name of request, can be any name
+          description: It enables church account to be updated
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updateChurchAdminAuthData"
+      responses:
+        200:
+          description: should return a church user
+     
+
+  
+
+
+
+
+  /delete-church-user-by-id:
+    delete:
+      tags:
+        - DELETE CHURCH ACCOUNT BOTH FOR ADMIN AND MEMBER BY ID # Value of the tag
+      summary: DELETE CHURCH ACCOUNT BOTH FOR ADMIN AND MEMBER.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   delete-account # name of request, can be any name
+          description: It enables users account to be deleted
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/deleteAccount"
+
+
+      responses:
+        200:
+          description: should return account deleted successfully
+
+
+  /re-send-email-code:
+    post:
+      tags: # Tag property
+        - FOR RE-SENDING EMAIL CODE # Value of the tag
+      summary: FOR RE-SENDING EMAIL CODE.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   Re-send email code # name of request, can be any name
+          description: It enables re-sending of email codes
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/reSendEmailCode"
+      responses: # server responses
+        200:
+          description: should return email code sent successful
+
+  /forgotPassword:
+    post:
+      tags: # Tag property
+        - FORGOT PASSWORD # Value of the tag
+      summary: FOR SENDING FORGOT PASSWORD CODE TO USER EMAIL ADDRESS.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   forgotPassword # name of request, can be any name
+          description: It enables sending of code to user email to confirm that the user is the owner of the account
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/forgotPassword"
+      responses: # server responses
+        200:
+          description: should return forgot password code sent successful if email is valid
+
+
+  /validate-forgot-password-code:
+    post:
+      tags: # Tag property
+        - FORGOT PASSWORD CODE # Value of the tag
+      summary: FOR VERIFYING FORGOT PASSWORD CODE
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   validate-forgot-password-code # name of request, can be any name
+          description: It enables verifing the forgotPassword code sent to the user
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/verifyForgotPassword"
+      responses: # server responses
+        200:
+          description: should return forgot password code is valid
+
+
+  /update-password:
+    put:
+      tags: # Tag property
+        - UPDATE PASSWORD # Value of the tag
+      summary: FOR UPDATING PASSWORD
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   update-password # name of request, can be any name
+          description: It enables users to update their password
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updatePassword"
+      responses: # server responses
+        200:
+          description: should return password updated successfully
+
+
+
+  /create-church-member-account:
+    post:
+      tags: # Tag property
+        - AUTH # Value of the tag
+      summary: CHURCH ACCOUNT REGISTRATION ENDPOINT FOR CHURCH MEMBERS.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   church-app-member-account-registration # name of request, can be any name
+          description: It enables all members to create have an account
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/membersAccount"
+      responses: # server responses
+        201:
+          description: should return church member account registration successful
+
+
+
+  /get-all-church-admins:
+    get:
+      tags:
+        - GET ALL CHURCH ADMINS # Value of the tag
+      summary: GET ALL CHURCH ADMINS.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-0
+
+        - in: query
+          name: page
+          type: number
+          default: 1
+          required: true
+      responses:
+        200:
+          description: should return all church admins
+
+  /update-church-member-auth-data-by-id:
+    put:
+      tags:
+        - UPDATE A CHURCH MEMBER ACCOUNT # Value of the tag
+      summary: UPDATE A CHURCH MEMBER ACCOUNT
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        
+        - in: body # request body
+          name:   update-account # name of request, can be any name
+          description: It enables church member account to be updated
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updateMemberAuthData"
+      responses:
+        200:
+          description: should return a church member
+     
+  /validate-phone-number-code:
+    post:
+      tags: # Tag property
+        - VALIDATE PHONE NUMBER CODE # Value of the tag
+      summary: FOR VERIFYING PHONE NUMBER CODE
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   validate-phone-number-code # name of request, can be any name
+          description: It enables verifing the phone number code sent to the user
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/verifyPhoneNumberCode"
+      responses: # server responses
+        200:
+          description: should return phone number code is valid
+
+  /re-send-phone-number-code:
+    post:
+      tags: # Tag property
+        - FOR RE-SENDING PHONE NUMBER CODE # Value of the tag
+      summary: FOR RE-SENDING PHONE NUMBER CODE.
+      produces:
+        - application/json
+      parameters:
+        - in: body # request body
+          name:   Re-send phone number code # name of request, can be any name
+          description: It enables re-sending of phone number codes
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/reSendPhoneNumberCode"
+      responses: # server responses
+        200:
+          description: should return phone number code sent successful
+
+
+
+  /update-phone-number:
+    put:
+      tags: # Tag property
+        - UPDATE PHONE NUMBER # Value of the tag
+      summary: FOR UPDATING PHONE NUMBER
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        
+        - in: body # request body
+          name:   update-phone-number# name of request, can be any name
+          description: It enables users to update their phone number
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updatePhoneNumber"
+      responses: # server responses
+        200:
+          description: should return phone number updated successfully
+
+
+
+  /verify-church-member:
+    put:
+      tags:
+        - VERIFY CHURCH MEMBER # Value of the tag
+      summary: VERIFY CHURCH MEMBER BY ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   verify-church-member # name of request, can be any name
+          description: It enables users churches joined to be updated by id
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updateChurchesJoined" 
+      responses: # server responses
+        200:
+          description: should return member verified successfully
+            
+            
+  /update-church-member-count:
+    put:
+      tags:
+        - UPDATE CHURCH MEMBER COUNT # Value of the tag
+      summary: UPDATE CHURCH MEMBER COUNT BY ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   verify-church-member # name of request, can be any name
+          description: It enables church admins to update their members count
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updateChurchMemberCount" 
+      responses: # server responses
+        200:
+          description: should return member count has added
+
+
+  /church-members:
+    get:
+      tags:
+        - LIST OF MEMBERS FOR A PARTICULAR CHURCH # Value of the tag
+      summary: GET A CHURCH MEMBER.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-0
+
+
+        - in: query
+          name: authId
+          type: string
+          default: 05533fe8-3c2d-4b13-8c20-3425754fc050
+          required: true
+
+        - in: query
+          name: page
+          type: number
+          default: 1
+          required: true
+      responses:
+        200:
+          description: should return a church member
+
+  /list-of-churches:
+    get:
+      tags:
+        - LIST OF CHURCHES BASED ON LOCATION # Value of the tag
+      summary: GET LIST OF CHURCHES BASED ON LOCATION.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-0
+
+
+        - in: query
+          name: country
+          type: string
+          default: London
+          required: true
+
+        - in: query
+          name: state
+          type: string
+          default: Aba
+          required: true 
+          
+          
+        - in: query
+          name: city
+          type: string
+          default: New York
+          required: true     
+
+        - in: query
+          name: page
+          type: number
+          default: 1
+          required: true
+      responses:
+        200:
+          description: should return a list of churches based on location
+
+
+
+
+  /get-unverified-members:
+    get:
+      tags:
+        - GET ALL UNVERIFIED CHURCH MEMBERS BY CHURCH ID # Value of the tag
+      summary: GET ALL UNVERIFIED CHURCH MEMBERS BY CHURCH ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-0
+
+        - in: query
+          name: page
+          type: number
+          default: 1
+          required: true
+
+
+        - in: query
+          name: authId
+          type: string
+          default: "Christ is faithful"
+          required: true
+      responses:
+        200:
+          description: should return all unverified members
+
+
+
+  /update-church-name:
+    put:
+      tags:
+        - CHANGE CHURCH FOR A MEMBER # Value of the tag
+      summary: UPDATE MEMBERS CHURCH BY ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   update-church-name # name of request, can be any name
+          description: It enables church members to change church
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/updateChurchName" 
+      responses: # server responses
+        200:
+          description: should return member church updated successfully
+
+
+  /update-email-address:
+    put:
+      tags:
+        - CHANGE CHURCH FOR A MEMBER # Value of the tag
+      summary: UPDATE MEMBERS CHURCH BY ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   update-email-address # name of request, can be any name
+          description: It enables church members to change church
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/emailAddress" 
+      responses: # server responses
+        200:
+          description: should return member church updated successfully
+
+
+  /update-meeting-days:
+    put:
+      tags:
+        - CHANGE CHURCH FOR A MEMBER # Value of the tag
+      summary: UPDATE MEMBERS CHURCH BY ID.
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: authorization
+          description: access token
+          required: true
+          default: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MzIwODQxODB9.60qxpvDKlXV3x4-XDf2GRWgEkuSvL_XuCYPbn5jil-
+        - in: body # request body
+          name:   update-email-address # name of request, can be any name
+          description: It enables church members to change church
+          required: true # can also be true depending on user preference
+          schema: # Schema definition
+            $ref: "#/definitions/udateMeetingDays" 
+      responses: # server responses
+        200:
+          description: should return member church updated successfully
+
+
+
+definitions: # Schema definition for request body
+  churchAccount:
+    type: object
+    properties:
+      email:
+          type: string
+          default: miriam@gmail.com
+      password:
+          type: string
+          default: password
+
+      username:
+          type: string
+          default: mimiluv
+
+      profileImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209
+
+      domination:
+          type: string
+          default: Catholic
+
+      country:
+          type: string
+          default: London
+
+      state:
+          type: string
+          default: Poland
+
+      city:
+          type: string
+          default: Manchester 
+
+      town:
+          type: string
+          default: Aba  
+
+      roadName:
+          type: string
+          default: Heinze
+
+      roadNumber:
+          type: string
+          default: 123B                
+
+      phoneNumber:
+          type: string
+          default: +2348037335555
+      
+      fullName:
+          type: string
+          default: Mimi Austin
+          
+      churchName:
+          type: string
+          default: Christ the king
+
+      churchAddress:
+          type: string
+          default: No 45B heavenly race avenue
+          
+      foundedDate:
+          type: string
+          default: 4/09/2021 
+          
+      description:
+          type: string
+          default: The only true church  
+          
+      churchMotto:
+          type: string
+          default: In God we trust
+          
+          
+      videoIntroUrl:
+          type: string
+          default: https://i.pravatar.cc/209
+          
+     
+          
+
+      
+          
+      
+      
+
+
+                
+           
+
+
+  generalLogin:
+    type: object
+    properties:
+      email:
+          type: string
+          default: miriam@gmail.com
+      password:
+          type: string
+          default: password
+
+       
+  validateEmail:
+    type: object
+    properties:
+      authId:
+          type: string
+          default: 6c02428b-2fc4-4cc2-b923-c045401f84bf
+      emailCode:
+          type: number
+          default: 123456
+
+
+
+  updateChurchAdminAuthData:
+    type: object
+    properties:
+      authId:
+          type: string
+          default: 6c02428b-2fc4-4cc2-b923-c045401f84b
+        
+
+      username:
+          type: string
+          default: mimiluv
+
+      profileImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209
+
+      domination:
+          type: string
+          default: Catholic
+
+      country:
+          type: string
+          default: London
+
+      state:
+          type: string
+          default: Poland
+
+      city:
+          type: string
+          default: Manchester 
+
+      town:
+          type: string
+          default: Aba  
+
+      roadName:
+          type: string
+          default: Heinze
+
+      roadNumber:
+          type: string
+          default: 123B                
+
+
+      
+      fullName:
+          type: string
+          default: Mimi Austin
+          
+    churchName:
+          type: string
+          default: Christ the king
+
+    churchAddress:
+          type: string
+          default: No 45B heavenly race avenue
+          
+    foundedDate:
+          type: string
+          default: 4/09/2021 
+          
+    description:
+          type: string
+          default: The only true church  
+          
+    churchMotto:
+          type: string
+          default: In God we trust
+          
+          
+          
+    videoIntroUrl:
+          type: string
+          default: https://i.pravatar.cc/209
+                
+  updateMemberAuthData:
+    type: object
+    properties:
+      authId:
+          type: string
+          default: 6c02428b-2fc4-4cc2-b923-c045401f84b
+        
+
+      username:
+          type: string
+          default: mimiluv
+
+      domination:
+          type: string
+          default: Catholic
+
+      country:
+          type: string
+          default: London
+
+      state:
+          type: string
+          default: Poland
+
+      city:
+          type: string
+          default: Manchester 
+
+      
+      fullName:
+          type: string
+          default: Mimi Austin
+          
+      DOB:
+          type: string
+          default: 01/01/2033
+
+      gender:
+          type: string
+          default: male
+          
+    
+
+
+  deleteAccount:
+    type: object
+    properties:
+      authId:
+          type: string
+          default: 6c02428b-2fc4-4cc2-b923-c045401f84bf
+
+ 
+  verifyToken:
+    type: object
+    properties:
+      token:
+          type: string
+          default: pass in user token
+
+
+  reSendEmailCode:
+    type: object
+    properties:
+      email:
+          type: string
+          default: mimi@gmail.com
+      
+
+  forgotPassword:
+    type: object
+    properties:
+      email:
+          type: string
+          default: mimi@gmail.com
+
+  verifyForgotPassword:
+    type: object
+    properties:
+      email:
+          type: string
+          default: mimi@gmail.com
+
+      emailCode:
+          type: number
+          default: 123456
+
+
+
+  reSendPhoneNumberCode:
+    type: object
+    properties:
+      phoneNumber:
+          type: string
+          default: +2347068360382
+      
+
+  verifyPhoneNumberCode:
+    type: object
+    properties:
+      authId:
+          type: string
+          default: 05533fe8-3c2d-4b13-8c20-3425754fc056
+
+      phoneNumberCode:
+          type: number
+          default: 123456         
+
+
+  updatePassword:
+    type: object
+    properties:
+      email:
+          type: string
+          default: mimi@gmail.com
+
+      password:
+          type: string
+          default: password  
+           
+           
+  updatePhoneNumber: 
+    type: object
+    properties:
+      authId:
+          type: string
+          default: a5970193-826b-4163-ad34-c2edc2f2187a
+
+      phoneNumber:
+          type: string
+          default: 07068360382  
+
+
+  membersAccount:
+    type: object
+    properties:
+      email:
+          type: string
+          default: austin@gmail.com
+      password:
+          type: string
+          default: password
+
+      username:
+          type: string
+          default: austin22
+
+
+      domination:
+          type: string
+          default: Catholic
+
+      churchesJoined:
+          type: string
+          default: Christ the king     
+
+      country:
+          type: string
+          default: London
+
+      state:
+          type: string
+          default: Poland
+
+      city:
+          type: string
+          default: Manchester 
+
+      phoneNumber:
+          type: string
+          default: 07068360382 
+        
+      fullName:
+          type: string
+          default: Mimi Austin
+           
+      DOB:
+          type: string
+          default: 01/01/2021
+
+      gender:
+          type: string
+          default: Male
+
+      
+           
+      
+
+  updateChurchesJoined:
+    type: object
+    properties:
+
+      authId:
+          type: String
+          default: '6176c336c400ae4ff58d2dcd'
+        
+  updateChurchMemberCount:
+    type: object
+    properties:
+
+      churchId:
+          type: String
+          default: '05533fe8-3c2d-4b13-8c20-3425754fc05'
+  
+  updateChurchName:  
+    type: object
+    properties:  
+      authId:
+          type: String
+          default: '05533fe8-3c2d-4b13-8c20-3425754fc05'     
+
+     
+      churchName:
+          type: String
+          default: 'Jesus is Lord'
+          
+          
+  emailAddress:  
+    type: object
+    properties:  
+      authId:
+          type: String
+          default: '05533fe8-3c2d-4b13-8c20-3425754fc056'     
+
+          
+      email:
+          type: String
+          default: 'mimi@gmail.com'     
+
+
+  udateMeetingDays:
+    type: object
+    properties:
+      meetings:
+        type: array
+        default: ["Nice", "Good"]
+
+
+      authId:
+        type: String
+        default: '05533fe8-3c2d-4b13-8c20-3425754fc056'  
+
+      churchId:
+        type: String
+        default: '05533fe8-3c2d-4b13-8c20-3425754fc056'            
