@@ -697,6 +697,10 @@ definitions: # Schema definition for request body
       videoIntroUrl:
           type: string
           default: https://i.pravatar.cc/209
+
+      coverImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209    
           
      
           
@@ -809,6 +813,10 @@ definitions: # Schema definition for request body
     videoIntroUrl:
           type: string
           default: https://i.pravatar.cc/209
+
+    coverImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209        
                 
   updateMemberAuthData:
     type: object
@@ -850,6 +858,10 @@ definitions: # Schema definition for request body
       gender:
           type: string
           default: male
+
+      coverImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209      
           
     
 
@@ -992,6 +1004,10 @@ definitions: # Schema definition for request body
       gender:
           type: string
           default: Male
+
+      coverImageUrl:
+          type: string
+          default: https://i.pravatar.cc/209      
 
       
            

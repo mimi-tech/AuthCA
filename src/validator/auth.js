@@ -11,6 +11,7 @@ module.exports = {
     password: Joi.string().required(),
     username: Joi.string().lowercase({ force: true }).required(),
     profileImageUrl: Joi.string(),
+    coverImageUrl: Joi.string().required(),
     fullName: Joi.string().required(),
     domination: Joi.string(),
     country: Joi.string().required(),
@@ -38,7 +39,7 @@ module.exports = {
     videoIntroUrl: Joi.string(),
     unverifiedMembersCount: Joi.number().required(),
     membersCount: Joi.number().required(),
-
+    
     
 
   },
@@ -57,7 +58,8 @@ module.exports = {
     state: Joi.string().required(),
     city: Joi.string().required(),
     phoneNumber: Joi.string().required(),
-    
+    coverImageUrl: Joi.string(),
+
     
     
     
@@ -96,6 +98,8 @@ module.exports = {
     description: Joi.string().required(),
     churchMotto: Joi.string().required(),
     videoIntoUrl: Joi.string().required(),
+    coverImageUrl: Joi.string().required(),
+
   },
 
 
@@ -109,6 +113,8 @@ module.exports = {
     country: Joi.string().required(),
     state: Joi.string().required(),
     city: Joi.string().required(),
+    coverImageUrl: Joi.string(),
+
   },
 
   deleteAChurchUser:{

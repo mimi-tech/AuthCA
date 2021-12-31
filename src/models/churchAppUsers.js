@@ -47,6 +47,11 @@ const churchAppAccount = new mongoose.Schema({
          required: [true,'user must have a username'],
         },
 
+        coverImageUrl: { 
+            type: String,
+            allowNull: true
+           },
+
     emailCode: { 
         select:false,
         type: Number,

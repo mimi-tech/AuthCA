@@ -194,6 +194,7 @@ const churchAccountRegistration = async (params) => {
       churchMotto,
       meetings,
       videoIntroUrl,
+      coverImageUrl
     } = params;
 
     //set acount type to personal account
@@ -273,6 +274,7 @@ const churchAccountRegistration = async (params) => {
       churchId: id,
       membersCount: 0,
       unverifiedMembersCount: 0,
+      coverImageUrl:coverImageUrl
     });
 
     //send emailCode to user email
@@ -320,6 +322,7 @@ const churchMembersRegistration = async (params) => {
       phoneNumber,
       fullName,
       churchesJoined,
+      coverImageUrl
     } = params;
 
     //set acount type to personal account
@@ -412,6 +415,7 @@ const churchMembersRegistration = async (params) => {
       churchId: isChurchExisting.id,
       churchJoinedId: isChurchExisting._id,
       memberVerified: false,
+      coverImageUrl:coverImageUrl
     });
 
     //get the church the user have joined and update there unverified members account
@@ -580,6 +584,7 @@ const updateChurchAuthData = async (params) => {
       description,
       churchMotto,
       videoIntroUrl,
+      coverImageUrl
     } = params;
     console.log(videoIntroUrl);
     //check if auth id exist
@@ -637,6 +642,7 @@ const updateChurchAuthData = async (params) => {
         description: description,
         churchMotto: churchMotto,
         videoIntroUrl: videoIntroUrl,
+        coverImageUrl:coverImageUrl
       };
 
       await ChurchAppUsers.findOneAndUpdate(filter, update, {
@@ -675,6 +681,7 @@ const updateChurchMemberAuthData = async (params) => {
       state,
       city,
       fullName,
+      coverImageUrl,
     } = params;
 
     //check if auth id exist
@@ -719,6 +726,7 @@ const updateChurchMemberAuthData = async (params) => {
         fullName: fullName,
         DOB: DOB,
         gender: gender,
+        coverImageUrl,
       };
       await ChurchAppUsers.findOneAndUpdate(filter, update, {
         new: true,
